@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'widgets/state_holder.dart';
-import 'widgets/sun.dart';
+import 'widgets/weather_indicator.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -59,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             CustomPaint(
-              painter: Sun(),
-              size: const Size(300, 300),
+              painter: WeatherIndicator(0.9),
+              size: const Size(0, 530),
             ),
           ],
         ),
