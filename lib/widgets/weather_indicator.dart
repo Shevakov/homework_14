@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 class WeatherIndicator extends CustomPainter {
   late final double wether;
-  late final bool textVisible;
 
-  WeatherIndicator(this.wether, this.textVisible) : super();
+  WeatherIndicator(this.wether) : super();
   double _getDropsOpacity(double value) {
     if (value < 0.7) {
       return 0;
@@ -68,30 +67,6 @@ class WeatherIndicator extends CustomPainter {
     canvas.drawLine(line1s, line1e, rainPaint);
     canvas.drawLine(line2s, line2e, rainPaint);
     canvas.drawLine(line3s, line3e, rainPaint);
-
-    if (textVisible) {
-      // Текст
-      const textStyle = TextStyle(
-        color: Colors.white,
-        fontSize: 26,
-      );
-      const textSpan = TextSpan(
-        text: 'Облачно,\n12 градусов',
-        style: textStyle,
-      );
-      final textPainter = TextPainter(
-        text: textSpan,
-        textDirection: TextDirection.ltr,
-      );
-      textPainter.layout(
-        minWidth: 0,
-        maxWidth: size.width,
-      );
-      final xCenter = (size.width - textPainter.width) / 2 - 40;
-      final yCenter = (size.height - textPainter.height) / 2 + 30;
-      final offset = Offset(xCenter, yCenter);
-      textPainter.paint(canvas, offset);
-    }
   }
 
   @override

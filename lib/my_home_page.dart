@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'widgets/custom_text.dart';
 import 'widgets/state_holder.dart';
 import 'widgets/weather_indicator.dart';
 
@@ -75,10 +76,27 @@ class _MyHomePageState extends State<MyHomePage> {
                       selected = !selected;
                     });
                   },
-                  child: CustomPaint(
-                    size: const Size(200, 200),
-                    painter: WeatherIndicator(0.9, selected),
-                  ),
+                  child: Stack(children: [
+                    CustomPaint(
+                      size: const Size(200, 200),
+                      painter: WeatherIndicator(0.9),
+                    ),
+                    selected
+                        ? const Positioned(
+                            top: 100,
+                            child: CustomText(
+                              blur: 5,
+                              color: Color(0xFF477C70),
+                              offset: Offset(5, 5),
+                              child: Text(
+                                'Облачно,\n12 градусов',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 26),
+                              ),
+                            ),
+                          )
+                        : const Text(''),
+                  ]),
                 ),
               ),
             ),
