@@ -13,6 +13,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool selected = false;
+
   MaterialColor? color = Colors.blue;
   List<MaterialColor> colorsApp = [
     Colors.blue,
@@ -54,13 +56,31 @@ class _MyHomePageState extends State<MyHomePage> {
           }).toList()
         ],
       )),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            CustomPaint(
-              painter: WeatherIndicator(0.9),
-              size: const Size(0, 530),
+      body: SizedBox(
+        width: 400,
+        height: 450,
+        child: Stack(
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(seconds: 2),
+              curve: Curves.easeIn,
+              top: selected ? 250 : 70,
+              right: selected ? 50 : -50,
+              child: AnimatedScale(
+                duration: const Duration(seconds: 2),
+                scale: selected ? 1.5 : 1,
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selected = !selected;
+                    });
+                  },
+                  child: CustomPaint(
+                    size: const Size(200, 200),
+                    painter: WeatherIndicator(0.9, selected),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
