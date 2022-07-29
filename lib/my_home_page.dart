@@ -15,6 +15,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool selected = false;
+  double _currentSliderValue = 1;
 
   MaterialColor? color = Colors.blue;
   List<MaterialColor> colorsApp = [
@@ -59,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
       )),
       body: SizedBox(
         width: 400,
-        height: 450,
+        height: 650,
         child: Stack(
           children: [
             AnimatedPositioned(
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Stack(children: [
                     CustomPaint(
                       size: const Size(200, 200),
-                      painter: WeatherIndicator(0.9),
+                      painter: WeatherIndicator(_currentSliderValue),
                     ),
                     selected
                         ? const Positioned(
@@ -100,6 +101,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            Positioned(
+                width: 400,
+                bottom: 0,
+                child: Slider(
+                  value: _currentSliderValue,
+                  max: 1,
+                  divisions: 10,
+                  label: _currentSliderValue.toString(),
+                  onChanged: (double value) {
+                    setState(() {
+                      _currentSliderValue = value;
+                    });
+                  },
+                )),
           ],
         ),
       ),
